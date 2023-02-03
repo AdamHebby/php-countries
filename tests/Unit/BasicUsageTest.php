@@ -66,4 +66,39 @@ final class BasicUsageTest extends TestCase
             $this->assertTrue(in_array('German', $country->languages));
         }
     }
+
+    public function testAllCountriesHaveNoNullData()
+    {
+        $countries = (new Countries())->all();
+
+        foreach ($countries as $country) {
+            $this->assertNotNull($country->name);
+            $this->assertNotNull($country->officialName);
+            $this->assertNotNull($country->topLevelDomains);
+            $this->assertNotNull($country->isoCodeAlpha2);
+            $this->assertNotNull($country->isoCodeAlpha3);
+            $this->assertNotNull($country->isoCodeNumeric);
+            $this->assertNotNull($country->languages);
+            $this->assertNotNull($country->languageCodes);
+            $this->assertNotNull($country->currencyCodes);
+            $this->assertNotNull($country->callingCodes);
+            $this->assertNotNull($country->capital);
+            $this->assertNotNull($country->region);
+            $this->assertNotNull($country->subregion);
+            $this->assertNotNull($country->latitude);
+            $this->assertNotNull($country->longitude);
+            $this->assertNotNull($country->areaInKilometres);
+        }
+    }
+
+    public function testThereAreNoDuplicateCountries()
+    {
+        $countries = (new Countries())->all();
+        $iso3Codes = [];
+
+        foreach ($countries as $country) {
+            $this->assertFalse(in_array($country->isoCodeAlpha3, $iso3Codes));
+            $iso3Codes[] = $country->isoCodeAlpha3;
+        }
+    }
 }

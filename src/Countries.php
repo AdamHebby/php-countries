@@ -2,24 +2,28 @@
 
 namespace RapidWeb\Countries;
 
+use Exception;
 use RapidWeb\Countries\DataSources\MledozeCountriesJson;
 use RapidWeb\Countries\Interfaces\DataSourceInterface;
 
 class Countries
 {
-    public $dataSource;
+    public DataSourceInterface $dataSource;
 
     public function __construct()
     {
         $this->setDataSource(new MledozeCountriesJson());
     }
 
-    public function setDataSource(DataSourceInterface $dataSource)
+    public function setDataSource(DataSourceInterface $dataSource): void
     {
         $this->dataSource = $dataSource;
     }
 
-    public function all()
+    /**
+     * @return Country[]
+     */
+    public function all(): array
     {
         $countries = $this->dataSource->all();
 
@@ -30,25 +34,32 @@ class Countries
         return $countries;
     }
 
-    public function getByName(string $name)
+    public function getByName(string $name): ?Country
     {
         foreach ($this->all() as $country) {
             if ($country->name == $name || $country->officialName == $name) {
                 return $country;
             }
         }
+
+        return null;
     }
 
-    public function getByIsoCode(string $code)
+    public function getByIsoCode(string $code): ?Country
     {
         foreach ($this->all() as $country) {
             if ($country->isoCodeAlpha2 == $code || $country->isoCodeAlpha3 == $code || $country->isoCodeNumeric == $code) {
                 return $country;
             }
         }
+
+        return null;
     }
 
-    public function getByLanguage(string $language)
+    /**
+     * @return Country[]
+     */
+    public function getByLanguage(string $language): array
     {
         $countries = [];
 

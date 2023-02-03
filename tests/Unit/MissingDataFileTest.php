@@ -10,14 +10,14 @@ final class MissingDataFileTest extends TestCase
     protected function setUp(): void
     {
         if (file_exists($this->dataFilePath)) {
-            rename($this->dataFilePath, $this->dataFilePath.'_tmp');
+            rename($this->dataFilePath, $this->dataFilePath . '_tmp');
         }
     }
 
     protected function tearDown(): void
     {
-        if (file_exists($this->dataFilePath.'_tmp')) {
-            rename($this->dataFilePath.'_tmp', $this->dataFilePath);
+        if (file_exists($this->dataFilePath . '_tmp')) {
+            rename($this->dataFilePath . '_tmp', $this->dataFilePath);
         }
     }
 

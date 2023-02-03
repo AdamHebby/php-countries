@@ -2,7 +2,12 @@
 
 namespace RapidWeb\Countries\Interfaces;
 
+use RapidWeb\Countries\Country;
+
 interface DataSourceInterface
 {
-    public function all();
+    /**
+     * @return Country[]
+     */
+    public function all(): array;
 }
