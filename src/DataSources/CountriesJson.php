@@ -18,7 +18,7 @@ class CountriesJson implements DataSourceInterface
 
         if (file_exists($path)) {
             $this->countryData = json_decode(file_get_contents($path), true);
-            break;
+            return;
         }
 
         if (!$this->countryData) {

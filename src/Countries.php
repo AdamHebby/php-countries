@@ -35,26 +35,41 @@ class Countries
         return $countries;
     }
 
-    public function getByName(string $name): ?Country
+    /**
+     * Filter an array of countries by a set of keys and values.
+     *
+     * @var string[] $keys
+     * @var string[] $values
+     *
+     * @return Country[]
+     */
+    public function filter(array $keys, array $values): array
     {
+        $countries = [];
+
         foreach ($this->all() as $country) {
-            if ($country->name == $name || $country->officialName == $name) {
-                return $country;
+            foreach ($keys as $key) {
+                if (
+                    in_array($country->{$key}, $values)
+                    || (is_array($country->{$key}) && count(array_intersect($country->{$key}, $values)) > 0)
+                ) {
+                    $countries[] = $country;
+                    break;
+                }
             }
         }
 
-        return null;
+        return $countries;
+    }
+
+    public function getByName(string $name): ?Country
+    {
+        return $this->oneOrNull($this->filter(['name', 'officialName'], [$name]));
     }
 
     public function getByIsoCode(string $code): ?Country
     {
-        foreach ($this->all() as $country) {
-            if ($country->isoCodeAlpha2 == $code || $country->isoCodeAlpha3 == $code || $country->isoCodeNumeric == $code) {
-                return $country;
-            }
-        }
-
-        return null;
+        return $this->oneOrNull($this->filter(['isoCodeAlpha2', 'isoCodeAlpha3', 'isoCodeNumeric'], [$code]));
     }
 
     /**
@@ -62,21 +77,23 @@ class Countries
      */
     public function getByLanguage(string $language): array
     {
-        $countries = [];
+        return $this->filter(['languages', 'languageCodes'], [$language]);
+    }
 
-        foreach ($this->all() as $country) {
-            foreach ($country->languages as $countryLanguage) {
-                if ($countryLanguage == $language) {
-                    $countries[] = $country;
-                }
-            }
-            foreach ($country->languageCodes as $countryLanguageCode) {
-                if ($countryLanguageCode == $language) {
-                    $countries[] = $country;
-                }
-            }
+    /**
+     * @return Country[]
+     */
+    public function getByRegion(string $region): array
+    {
+        return $this->filter(['region'], [$region]);
+    }
+
+    private function oneOrNull(array $countries): ?Country
+    {
+        if (count($countries) == 1) {
+            return $countries[0];
         }
 
-        return $countries;
+        return null;
     }
 }
