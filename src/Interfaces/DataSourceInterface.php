@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace RapidWeb\Countries\Interfaces;
 
 use RapidWeb\Countries\Country;

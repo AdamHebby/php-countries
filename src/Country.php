@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace RapidWeb\Countries;
 
 class Country
@@ -15,7 +17,7 @@ class Country
         public readonly array $languageCodes,
         public readonly array $currencyCodes,
         public readonly array $callingCodes,
-        public readonly string $capital,
+        public readonly null|string $capital,
         public readonly string $region,
         public readonly string $subregion,
         public readonly null|float $latitude,
@@ -37,7 +39,7 @@ class Country
             array_keys((array) $data['languages']),
             array_keys((array) $data['currencies']),
             (array) $data['callingCodes'],
-            reset($data['capital']),
+            $data['capital'][0] ?? null,
             $data['region'],
             $data['subregion'],
             isset($data['latlng'][0]) ? $data['latlng'][0] : null,

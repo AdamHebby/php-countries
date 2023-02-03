@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace RapidWeb\Countries\DataSources;
 
 use Exception;

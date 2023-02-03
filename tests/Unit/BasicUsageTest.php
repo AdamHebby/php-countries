@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use PHPUnit\Framework\TestCase;
 use RapidWeb\Countries\Countries;
 use RapidWeb\Countries\Country;
@@ -82,7 +84,6 @@ final class BasicUsageTest extends TestCase
             $this->assertNotNull($country->languageCodes);
             $this->assertNotNull($country->currencyCodes);
             $this->assertNotNull($country->callingCodes);
-            $this->assertNotNull($country->capital);
             $this->assertNotNull($country->region);
             $this->assertNotNull($country->subregion);
             $this->assertNotNull($country->latitude);
