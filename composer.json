@@ -1,5 +1,5 @@
 {
-    "name": "rapidwebltd/php-countries",
+    "name": "adamhebby/php-countries",
     "description": "PHP Countries is a library that provides an elegant syntax to country data.",
     "type": "library",
     "require": {

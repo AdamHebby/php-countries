@@ -15,7 +15,7 @@ Forked from [rapidwebltd/php-countries](https://github.com/rapidwebltd/php-count
 You can install PHP Countries via Composer, as follows.
 
 ```
-composer require rapidwebltd/php-countries
+composer require adamhebby/php-countries
 ```
 
 ## Usage
@@ -47,8 +47,8 @@ Country details can be retrieved from the country's official or common name.
 ```php
 var_dump($countries->getByName('United Kingdom'));
 
-/* 
-object(RapidWeb\Countries\Country)#4869 (16) {
+/*
+object(RapidWeb\Countries\Country)#456 (16) {
   ["name"]=>
   string(14) "United Kingdom"
   ["officialName"]=>
@@ -82,7 +82,7 @@ object(RapidWeb\Countries\Country)#4869 (16) {
   ["callingCodes"]=>
   array(1) {
     [0]=>
-    string(2) "44"
+    string(3) "+44"
   }
   ["capital"]=>
   string(6) "London"
@@ -91,11 +91,11 @@ object(RapidWeb\Countries\Country)#4869 (16) {
   ["subregion"]=>
   string(15) "Northern Europe"
   ["latitude"]=>
-  int(54)
+  float(54)
   ["longitude"]=>
-  int(-2)
+  float(-2)
   ["areaInKilometres"]=>
-  int(242900)
+  float(242900)
 }
 */
 ```
