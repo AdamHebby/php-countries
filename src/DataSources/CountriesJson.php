@@ -8,22 +8,17 @@ use Exception;
 use RapidWeb\Countries\Country;
 use RapidWeb\Countries\Interfaces\DataSourceInterface;
 
-class MledozeCountriesJson implements DataSourceInterface
+class CountriesJson implements DataSourceInterface
 {
     private null|array $countryData = null;
 
     public function __construct()
     {
-        $paths = [
-            __DIR__ . '/../../../../mledoze/countries/dist/countries.json',
-            __DIR__ . '/../../vendor/mledoze/countries/dist/countries.json',
-        ];
+        $path = __DIR__ . '/../../data/countries.json';
 
-        foreach ($paths as $path) {
-            if (file_exists($path)) {
-                $this->countryData = json_decode(file_get_contents($path), true);
-                break;
-            }
+        if (file_exists($path)) {
+            $this->countryData = json_decode(file_get_contents($path), true);
+            break;
         }
 
         if (!$this->countryData) {

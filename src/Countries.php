@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace RapidWeb\Countries;
 
-use Exception;
-use RapidWeb\Countries\DataSources\MledozeCountriesJson;
+use RapidWeb\Countries\DataSources\CountriesJson;
 use RapidWeb\Countries\Interfaces\DataSourceInterface;
 
 class Countries
@@ -14,7 +13,7 @@ class Countries
 
     public function __construct()
     {
-        $this->setDataSource(new MledozeCountriesJson());
+        $this->setDataSource(new CountriesJson());
     }
 
     public function setDataSource(DataSourceInterface $dataSource): void
