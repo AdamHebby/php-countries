@@ -6,6 +6,10 @@
 
 PHP Countries is a library that provides an elegant syntax to country data.
 
+## FORKED
+
+Forked from [rapidwebltd/php-countries](https://github.com/rapidwebltd/php-countries) and upgraded to PHP 8.1, including readonly properties and newer country data.
+
 ## Installation
 
 You can install PHP Countries via Composer, as follows.
